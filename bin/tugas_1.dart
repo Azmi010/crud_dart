@@ -9,16 +9,21 @@ class TokoPupuk {
       {'name': 'Pupuk Kandang', 'price': 20000.0},
       {'name': 'Pupuk Kompos', 'price': 30000.0},
     ];
-
-  for (var pupukData in dataAwal) {
-    tambahPupuk(pupukData['name'], pupukData['price']);
-  }
+    
+  for (int i = 0; i < dataAwal.length; i++) {
+      pupuk[i + 1] = {
+        'name': dataAwal[i]['name'],
+        'price': dataAwal[i]['price']
+      };
+    }
   }
 
   void tambahPupuk(String name, double price) {
-    int number = pupuk.length + 1;
-    pupuk[number] = {'name' : name, 'price' : price};
-    print('Pupuk Berhasil Ditambahkan');
+    if (name != '') {
+      int number = pupuk.length + 1;
+      pupuk[number] = {'name' : name, 'price' : price};
+      print('Pupuk Berhasil Ditambahkan');
+    }
   }
 
   void lihatPupuk() {
@@ -37,11 +42,15 @@ class TokoPupuk {
   }
 
   void updatePupuk(int number, String name, double price) {
-    if (pupuk.containsKey(number)) {
-      pupuk[number] = {'name' : name, 'price' : price};
-      print('Pupuk Berhasil Diupdate');
+    if (name != '') {
+      if (pupuk.containsKey(number)) {
+        pupuk[number] = {'name' : name, 'price' : price};
+        print('Pupuk Berhasil Diupdate');
+      } else {
+        print('Tidak Ditemukan Pupuk Yang Sesuai');
+      }
     } else {
-      print('Tidak Ditemukan Pupuk Yang Sesuai');
+      print('Nama tidak boleh kosong');
     }
   }
 
@@ -90,7 +99,7 @@ void main() {
       case 3:
         stdout.write('Masukkan Nomor Pupuk yang akan diupdate: ');
         var number = int.tryParse(stdin.readLineSync() ?? '');
-        if (number != null) {
+        if (number != null && number <= store.pupuk.length) {
         stdout.write('Masukkan Nama Pupuk Terbaru: ');
         var name = stdin.readLineSync() ?? '';
         stdout.write('Masukkan Harga Pupuk Terbaru: ');

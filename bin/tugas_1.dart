@@ -3,6 +3,18 @@ import 'dart:io';
 class TokoPupuk {
   Map<int, Map<String, dynamic>> pupuk = {};
 
+  TokoPupuk() {
+  List<Map<String, dynamic>> dataAwal = [
+      {'name': 'Pupuk Urea', 'price': 50000.0},
+      {'name': 'Pupuk Kandang', 'price': 20000.0},
+      {'name': 'Pupuk Kompos', 'price': 30000.0},
+    ];
+
+  for (var pupukData in dataAwal) {
+    tambahPupuk(pupukData['name'], pupukData['price']);
+  }
+  }
+
   void tambahPupuk(String name, double price) {
     int number = pupuk.length + 1;
     pupuk[number] = {'name' : name, 'price' : price};
